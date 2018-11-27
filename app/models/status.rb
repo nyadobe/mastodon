@@ -348,8 +348,6 @@ class Status < ApplicationRecord
 
       return if account_ids.empty?
 
-      accounts = Account.where(id: account_ids).includes(:account_stat).each_with_object({}) { |a, h| h[a.id] = a }
-
       cached_items.each do |item|
         item.account = accounts[item.account_id]
         item.reblog.account = accounts[item.reblog.account_id] if item.reblog?
